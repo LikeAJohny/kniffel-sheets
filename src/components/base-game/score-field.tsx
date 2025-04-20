@@ -1,39 +1,44 @@
 import { cn } from "@/lib/utils";
 import { validateScoreField } from "@/rules/base-game";
-import { scoresAtom } from "@/state/base-game";
+import { useScoreField } from "@/state/base-game.jotai";
 import type { ScoreField } from "@/types/base-game";
-import { useAtom } from "jotai";
 import { useState, type ChangeEvent } from "react";
 import { Input } from "../ui/input";
 
-export function ScoreField({ name }: { name: ScoreField }) {
-  const [scores, setScores] = useAtom(scoresAtom);
-  const [value, setValue] = useState(scores[name]?.toString() || "");
+export function ScoreField({
+  gameIndex,
+  name,
+}: {
+  gameIndex: number;
+  name: ScoreField;
+}) {
+  const [score, setScore] = useScoreField(gameIndex, name);
+  const [value, setValue] = useState(score?.toString() || "");
   const [msg, setMsg] = useState("");
   const err = msg !== "";
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const v = parseInt(e.target.value);
+    const score = parseInt(e.target.value);
 
-    if (isNaN(v)) {
+    if (isNaN(score)) {
       setValue("");
       setMsg("");
     } else {
-      setValue(v.toString());
+      setValue(score.toString());
     }
   };
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
-    const v = parseInt(e.target.value);
+    const score = parseInt(e.target.value);
 
-    if (isNaN(v)) return;
+    if (isNaN(score)) return;
 
-    const valid = validateScoreField(name, v);
+    const valid = validateScoreField(name, score);
     if (!valid) {
       setMsg("Invalid input");
     } else {
       setMsg("");
-      setScores({ ...scores, [name]: v });
+      setScore(score);
     }
   };
 

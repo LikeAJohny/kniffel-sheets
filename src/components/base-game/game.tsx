@@ -1,34 +1,30 @@
-import { resultsAtom } from "@/state/base-game";
-import { useAtom } from "jotai";
+import type { BaseSheet } from "@/types/base-game";
 import { ResultField } from "./result-field";
 import { ScoreField } from "./score-field";
 
-export function Game() {
-  const [results] = useAtom(resultsAtom);
-
+export function Game({ game }: { game: ElementOf<BaseSheet["games"]> }) {
   return (
     <div>
-      <ScoreField name="ones" />
-      <ScoreField name="ones" />
-      <ScoreField name="twos" />
-      <ScoreField name="threes" />
-      <ScoreField name="fours" />
-      <ScoreField name="fives" />
-      <ScoreField name="sixes" />
-      <ResultField value={results.topResult} />
-      <ResultField value={results.topBonus} />
-      <ResultField value={results.topTotal} />
+      <ScoreField name="ones" gameIndex={game.index} />
+      <ScoreField name="twos" gameIndex={game.index} />
+      <ScoreField name="threes" gameIndex={game.index} />
+      <ScoreField name="fours" gameIndex={game.index} />
+      <ScoreField name="fives" gameIndex={game.index} />
+      <ScoreField name="sixes" gameIndex={game.index} />
+      <ResultField name="topResult" gameIndex={game.index} />
+      <ResultField name="topBonus" gameIndex={game.index} />
+      <ResultField name="topTotal" gameIndex={game.index} />
 
-      <ScoreField name="threeOfAKind" />
-      <ScoreField name="fourOfAKind" />
-      <ScoreField name="fullHouse" />
-      <ScoreField name="smallStraight" />
-      <ScoreField name="largeStraight" />
-      <ScoreField name="yahtzee" />
-      <ScoreField name="chance" />
-      <ResultField value={results.bottomResult} />
-      <ResultField value={results.topTotal} />
-      <ResultField value={results.total} />
+      <ScoreField name="threeOfAKind" gameIndex={game.index} />
+      <ScoreField name="fourOfAKind" gameIndex={game.index} />
+      <ScoreField name="fullHouse" gameIndex={game.index} />
+      <ScoreField name="smallStraight" gameIndex={game.index} />
+      <ScoreField name="largeStraight" gameIndex={game.index} />
+      <ScoreField name="yahtzee" gameIndex={game.index} />
+      <ScoreField name="chance" gameIndex={game.index} />
+      <ResultField name="bottomResult" gameIndex={game.index} />
+      <ResultField name="topTotal" gameIndex={game.index} />
+      <ResultField name="total" gameIndex={game.index} />
     </div>
   );
 }

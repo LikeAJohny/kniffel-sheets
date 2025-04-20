@@ -1,3 +1,4 @@
+import { useSheet } from "@/state/base-game.jotai";
 import {
   ArrowRight,
   Dice1,
@@ -10,7 +11,9 @@ import {
 import { Game } from "./game";
 import { SheetRow } from "./sheet-row";
 
-export function Sheet({ games }: { games: number }) {
+export function Sheet() {
+  const { sheet } = useSheet();
+
   return (
     <section className="flex border">
       <aside>
@@ -90,9 +93,7 @@ export function Sheet({ games }: { games: number }) {
         <SheetRow name="Endsumme" explanation={<ArrowRight />} />
       </aside>
       <main className="flex">
-        {[...Array(games).keys()].map((g) => (
-          <Game key={g} />
-        ))}
+        {sheet?.games.map((game, i) => <Game key={i} game={game} />)}
       </main>
     </section>
   );

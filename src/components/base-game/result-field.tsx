@@ -1,10 +1,20 @@
+import { useResultField } from "@/state/base-game.jotai";
+import type { BaseResults } from "@/types/base-game";
 import { Input } from "../ui/input";
 
-export function ResultField({ value }: { value: number | null }) {
-  let val;
+export function ResultField({
+  gameIndex,
+  name,
+}: {
+  gameIndex: number;
+  name: keyof BaseResults;
+}) {
+  const results = useResultField(gameIndex);
+  const value = results[name];
+
+  let val = "";
   if (value === 0) val = "-";
-  else if (value === null) val = "";
-  else val = value.toString();
+  else if (value !== null) val = value.toString();
 
   return (
     <Input

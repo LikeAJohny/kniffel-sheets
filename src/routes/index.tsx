@@ -1,36 +1,51 @@
-import { createFileRoute } from "@tanstack/react-router";
-import logo from "../logo.svg";
-import "../App.css";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useSheet } from "@/state/base-game.jotai";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import type { FormEvent } from "react";
 
 export const Route = createFileRoute("/")({
   component: App,
 });
 
 function App() {
+  const navigate = useNavigate();
+  const { start } = useSheet();
+
+  const handleStart = (e: FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const count = Number(formData.get("games"));
+
+    start(count);
+    navigate({ to: "/play" });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="App-link"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <div className="flex flex-col gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Bla</CardTitle>
+              <CardDescription>Bla</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleStart}>
+                <Input id="games" name="games" placeholder="Number Of Games" />
+                <Button type="submit">Start</Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
