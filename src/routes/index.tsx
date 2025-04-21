@@ -8,11 +8,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useSheet } from "@/state/base-game.jotai";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import type { FormEvent } from "react";
+import { pb } from "@/lib/pocketbase";
 
 export const Route = createFileRoute("/")({
   component: App,
+  loader: () => {
+    if (!pb.authStore.isValid) {
+      throw redirect({ to: "/login" });
+    }
+  },
 });
 
 function App() {
