@@ -1,6 +1,7 @@
 import type { BaseSheet } from "@/types/base-game";
 import { ResultField } from "./result-field";
 import { ScoreField } from "./score-field";
+import { ScoreFieldBool } from "./score-field.bool";
 
 export function Game({ game }: { game: ElementOf<BaseSheet["games"]> }) {
   return (
@@ -17,10 +18,18 @@ export function Game({ game }: { game: ElementOf<BaseSheet["games"]> }) {
 
       <ScoreField name="threeOfAKind" gameIndex={game.index} />
       <ScoreField name="fourOfAKind" gameIndex={game.index} />
-      <ScoreField name="fullHouse" gameIndex={game.index} />
-      <ScoreField name="smallStraight" gameIndex={game.index} />
-      <ScoreField name="largeStraight" gameIndex={game.index} />
-      <ScoreField name="yahtzee" gameIndex={game.index} />
+      <ScoreFieldBool name="fullHouse" scoreValue={25} gameIndex={game.index} />
+      <ScoreFieldBool
+        name="smallStraight"
+        scoreValue={30}
+        gameIndex={game.index}
+      />
+      <ScoreFieldBool
+        name="largeStraight"
+        scoreValue={40}
+        gameIndex={game.index}
+      />
+      <ScoreFieldBool name="yahtzee" scoreValue={50} gameIndex={game.index} />
       <ScoreField name="chance" gameIndex={game.index} />
       <ResultField name="bottomResult" gameIndex={game.index} />
       <ResultField name="topTotal" gameIndex={game.index} />

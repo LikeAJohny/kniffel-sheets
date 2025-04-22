@@ -6,11 +6,11 @@ import { useState, type ChangeEvent } from "react";
 import { Input } from "../ui/input";
 
 export function ScoreField({
-  gameIndex,
   name,
+  gameIndex,
 }: {
-  gameIndex: number;
   name: ScoreField;
+  gameIndex: number;
 }) {
   const [score, setScore] = useScoreField(gameIndex, name);
   const [value, setValue] = useState(score?.toString() || "");
