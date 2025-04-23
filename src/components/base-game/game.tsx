@@ -1,7 +1,7 @@
 import type { BaseSheet } from "@/types/base-game";
 import { ResultField } from "./result-field";
-import { ScoreField } from "./score-field";
 import { ScoreFieldBool } from "./score-field.bool";
+import { ScoreField } from "./score-field";
 
 export function Game({ game }: { game: ElementOf<BaseSheet["games"]> }) {
   return (

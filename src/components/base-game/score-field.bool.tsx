@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useScoreField } from "@/state/base-game.jotai";
-import type { ScoreField } from "@/types/base-game";
+import type { BaseScoreField } from "@/types/base-game";
 import { Check, Minus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -12,7 +12,7 @@ export function ScoreFieldBool({
   scoreValue,
   gameIndex,
 }: {
-  name: ScoreField;
+  name: BaseScoreField;
   scoreValue: number;
   gameIndex: number;
 }) {

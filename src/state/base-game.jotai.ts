@@ -2,7 +2,7 @@ import type {
   BaseResults,
   BaseScores,
   BaseSheet,
-  ScoreField,
+  BaseScoreField,
 } from "@/types/base-game";
 import { atom, useAtom, useAtomValue } from "jotai";
 import { atomFamily, atomWithStorage } from "jotai/utils";
@@ -47,7 +47,7 @@ const initialResults: BaseResults = {
 export const sheetAtom = atomWithStorage<BaseSheet | null>("sheet", null);
 
 export const scoreFieldAtom = atomFamily(
-  (param: { gameIndex: number; field: ScoreField }) =>
+  (param: { gameIndex: number; field: BaseScoreField }) =>
     atom(
       (get) => {
         const sheet = get(sheetAtom);
@@ -149,7 +149,7 @@ export const useSheet = () => {
   return { sheet, start };
 };
 
-export const useScoreField = (gameIndex: number, field: ScoreField) => {
+export const useScoreField = (gameIndex: number, field: BaseScoreField) => {
   const atom = useMemo(
     () => scoreFieldAtom({ gameIndex, field }),
     [gameIndex, field],

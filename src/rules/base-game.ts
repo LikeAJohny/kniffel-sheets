@@ -1,10 +1,10 @@
 import type {
-  ScoreField,
-  ScoreFieldRule,
-  ScoreFieldValidator,
+  BaseScoreField,
+  BaseScoreFieldRule,
+  BaseScoreFieldValidator,
 } from "@/types/base-game";
 
-export const scoreFieldRules: Record<ScoreField, ScoreFieldRule> = {
+export const scoreFieldRules: Record<BaseScoreField, BaseScoreFieldRule> = {
   ones: { min: 0, max: 5, div: 1 },
   twos: { min: 0, max: 10, div: 2 },
   threes: { min: 0, max: 15, div: 3 },
@@ -20,8 +20,8 @@ export const scoreFieldRules: Record<ScoreField, ScoreFieldRule> = {
   chance: { min: 5, max: 30 },
 };
 
-export const validateScoreField: ScoreFieldValidator = (
-  field: ScoreField,
+export const validateScoreField: BaseScoreFieldValidator = (
+  field: BaseScoreField,
   score: number | null,
 ) => {
   const rule = scoreFieldRules[field];

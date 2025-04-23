@@ -1,29 +1,17 @@
-export type ScoreField =
-  | "ones"
-  | "twos"
-  | "threes"
-  | "fours"
-  | "fives"
-  | "sixes"
-  | "threeOfAKind"
-  | "fourOfAKind"
-  | "fullHouse"
-  | "smallStraight"
-  | "largeStraight"
-  | "yahtzee"
-  | "chance";
-
-export type ScoreFieldRule = {
-  min?: number;
-  max?: number;
-  div?: number;
-  eq?: number;
+export type BaseSheet = {
+  id: string | null;
+  player: string | null;
+  games: BaseGame[];
+  startedAt: Date;
+  lastMoveAt: Date | null;
+  finishedAt: Date | null;
 };
 
-export type ScoreFieldValidator = (
-  field: ScoreField,
-  score: number | null,
-) => boolean;
+export type BaseGame = {
+  index: number;
+  scores: BaseScores;
+  results: BaseResults;
+};
 
 export type BaseScores = {
   ones: number | null;
@@ -49,17 +37,16 @@ export type BaseResults = {
   total: number | null;
 };
 
-export type BaseGame = {
-  index: number;
-  scores: BaseScores;
-  results: BaseResults;
+export type BaseScoreField = keyof BaseScores;
+
+export type BaseScoreFieldRule = {
+  min?: number;
+  max?: number;
+  div?: number;
+  eq?: number;
 };
 
-export type BaseSheet = {
-  id: string | null;
-  player: string | null;
-  games: BaseGame[];
-  startedAt: Date;
-  lastMoveAt: Date | null;
-  finishedAt: Date | null;
-};
+export type BaseScoreFieldValidator = (
+  field: BaseScoreField,
+  score: number | null,
+) => boolean;

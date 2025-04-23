@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { validateScoreField } from "@/rules/base-game";
 import { useScoreField } from "@/state/base-game.jotai";
-import type { ScoreField } from "@/types/base-game";
+import type { BaseScoreField } from "@/types/base-game";
 import { useState, type ChangeEvent } from "react";
 import { Input } from "../ui/input";
 
@@ -9,7 +9,7 @@ export function ScoreField({
   name,
   gameIndex,
 }: {
-  name: ScoreField;
+  name: BaseScoreField;
   gameIndex: number;
 }) {
   const [score, setScore] = useScoreField(gameIndex, name);
