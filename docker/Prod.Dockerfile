@@ -8,7 +8,7 @@ RUN npm install -g pnpm && \
     pnpm install --frozen-lockfile --production
 
 COPY . .
-RUN npm run build
+RUN pnpm build
 
 # serve
 FROM node:22-alpine
