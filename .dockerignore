@@ -1,0 +1,6 @@
+/.git
+/.pb
+/.vscode
+/node_modules
+.gitignore
+.env
