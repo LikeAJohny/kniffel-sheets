@@ -1,9 +1,13 @@
+import type { Player } from "./player";
+
 export type BaseSheet = {
   id: string | null;
-  player: string | null;
+  player: Player | null;
+  variant: "base";
+  score: number;
   games: BaseGame[];
   startedAt: Date;
-  lastMoveAt: Date | null;
+  lastRollAt: Date | null;
   finishedAt: Date | null;
 };
 
@@ -33,7 +37,7 @@ export type BaseResults = {
   topResult: number | null;
   topBonus: number | null;
   topTotal: number | null;
-  bottomResult: number | null;
+  bottomTotal: number | null;
   total: number | null;
 };
 

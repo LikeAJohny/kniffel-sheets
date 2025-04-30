@@ -6,10 +6,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { createFileRoute } from "@tanstack/react-router";
+import { pb } from "@/lib/pocketbase";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/play")({
   component: RouteComponent,
+  loader: () => {
+    if (!pb.authStore.isValid) {
+      throw redirect({ to: "/login" });
+    }
+  },
 });
 
 function RouteComponent() {

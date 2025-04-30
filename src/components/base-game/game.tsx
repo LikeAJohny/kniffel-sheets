@@ -2,6 +2,7 @@ import type { BaseSheet } from "@/types/base-game";
 import { ResultField } from "./result-field";
 import { ScoreFieldBool } from "./score-field.bool";
 import { ScoreField } from "./score-field";
+import { type ElementOf } from "@/types/helpers";
 
 export function Game({ game }: { game: ElementOf<BaseSheet["games"]> }) {
   return (
@@ -31,7 +32,7 @@ export function Game({ game }: { game: ElementOf<BaseSheet["games"]> }) {
       />
       <ScoreFieldBool name="yahtzee" scoreValue={50} gameIndex={game.index} />
       <ScoreField name="chance" gameIndex={game.index} />
-      <ResultField name="bottomResult" gameIndex={game.index} />
+      <ResultField name="bottomTotal" gameIndex={game.index} />
       <ResultField name="topTotal" gameIndex={game.index} />
       <ResultField name="total" gameIndex={game.index} />
     </div>

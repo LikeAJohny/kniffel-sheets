@@ -1,3 +1,12 @@
+import { AppSidebar } from "@/components/layout/app-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,25 +16,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useSheet } from "@/state/base-game.jotai";
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
-import type { FormEvent } from "react";
-import { pb } from "@/lib/pocketbase";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/layout/app-sidebar";
-import { Separator } from "@/components/ui/separator";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
+import { pb } from "@/lib/pocketbase";
+import { useSheet } from "@/state/base-game.jotai";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import type { FormEvent } from "react";
 
 export const Route = createFileRoute("/")({
   component: App,

@@ -1,21 +1,23 @@
+import { createSheet } from "@/lib/pocketbase";
 import type {
   BaseResults,
+  BaseScoreField,
   BaseScores,
   BaseSheet,
-  BaseScoreField,
 } from "@/types/base-game";
 import { atom, useAtom, useAtomValue } from "jotai";
 import { atomFamily, atomWithStorage } from "jotai/utils";
 import { useMemo } from "react";
-import { v4 as uuid } from "uuid";
 
 const initialSheet = (games: BaseSheet["games"] = []): BaseSheet => {
   return {
-    id: uuid(),
+    id: null,
     player: null,
+    variant: "base",
+    score: 0,
     games,
     startedAt: new Date(),
-    lastMoveAt: null,
+    lastRollAt: null,
     finishedAt: null,
   };
 };
@@ -40,7 +42,7 @@ const initialResults: BaseResults = {
   topResult: null,
   topBonus: null,
   topTotal: null,
-  bottomResult: null,
+  bottomTotal: null,
   total: null,
 };
 
@@ -127,7 +129,7 @@ export const gameResultsAtom = atomFamily(
         topResult,
         topBonus,
         topTotal,
-        bottomResult,
+        bottomTotal: bottomResult,
         total: topTotal + bottomResult,
       };
     }),
@@ -143,7 +145,10 @@ export const useSheet = () => {
       scores: { ...initialScores },
       results: { ...initialResults },
     }));
-    setSheet(initialSheet(games));
+    const sheet = initialSheet(games);
+
+    createSheet(sheet);
+    setSheet(sheet);
   };
 
   return { sheet, start };
